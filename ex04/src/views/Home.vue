@@ -8,6 +8,7 @@
     <canvas id="canvasOutput" ></canvas>
     <div class="caption">canvasOutput
       <button v-on:click="handleRotate">Rotate</button>
+      <button v-on:click="handleGray">To Gray</button>
       <button v-on:click="handleSave">Save</button>
     </div>
   </div>
@@ -30,6 +31,11 @@ export default {
     onLoadImage() {
       const imgElement = document.getElementById('imageSrc');
       const mat = cv.imread(imgElement);
+      cv.imshow('canvasOutput', mat);
+    },
+    handleGray() {
+      const mat = cv.imread('canvasOutput');
+      cv.cvtColor(mat, mat, cv.COLOR_RGBA2GRAY);
       cv.imshow('canvasOutput', mat);
     },
     handleRotate() {
